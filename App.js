@@ -1,5 +1,6 @@
 import React from "react";
 <<<<<<< HEAD
+<<<<<<< HEAD
 import {
   StyleSheet,
   Text,
@@ -225,19 +226,28 @@ class HomeScreen extends React.Component {
 import { createStackNavigator, createAppContainer } from 'react-navigation';
 import HomeScreen from './app/screens/HomeScreen'
 import SettingsScreen from './app/screens/SettingsScreen'
+=======
+import { createStackNavigator, createAppContainer } from "react-navigation";
+import HomeScreen from "./app/screens/HomeScreen";
+import SettingsScreen from "./app/screens/SettingsScreen";
+>>>>>>> 2a9e15a... add calendar
 
 const AppNavigator = createStackNavigator({
   Home: {
     screen: HomeScreen,
     navigationOptions: {
+<<<<<<< HEAD
       headerTitle: 'Jarvis'
 >>>>>>> 44f3cb4... Separated home and settings screen and added destination form to settings page
+=======
+      headerTitle: "Jarvis"
+>>>>>>> 2a9e15a... add calendar
     }
   },
   Settings: {
     screen: SettingsScreen,
     navigationOptions: {
-      headerTitle: 'Settings'
+      headerTitle: "Settings"
     }
   }
 });
