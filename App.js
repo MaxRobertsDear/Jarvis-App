@@ -5,8 +5,12 @@ import {
   View,
   ActivityIndicator,
   Image,
+<<<<<<< HEAD
   Button,
   TextInput
+=======
+  Button
+>>>>>>> cf2440a... pass traveltime to parent app.js
 } from "react-native";
 import * as Speech from "expo-speech";
 import * as Location from "expo-location";
@@ -28,9 +32,13 @@ export default class App extends React.Component {
       dataSource: null,
       weatherReport: null,
       latitude: null,
+<<<<<<< HEAD
       longitude: null,
       text: "Enter Postcode",
       postcode: ""
+=======
+      longitude: null
+>>>>>>> cf2440a... pass traveltime to parent app.js
     };
   }
 
@@ -97,7 +105,11 @@ export default class App extends React.Component {
         }.,`;
       } else {
         weatherReport += `It is ${weatherScript[allWeather[0]].current}, and ${
+<<<<<<< HEAD
           weatherScript[allWeather[1]].soon
+=======
+          allWeather[1].soon
+>>>>>>> cf2440a... pass traveltime to parent app.js
         }.,`;
       }
       if (allWeather[3].includes(allWeather[2])) {
@@ -113,6 +125,7 @@ export default class App extends React.Component {
     }
     weatherReport += `The temperature is currently ${[
       allTemp[0]
+<<<<<<< HEAD
     ]} degrees and will later be around ${[allTemp[3]]} degrees.,`;
     weatherReport += `Today it will take you ${
       this.state.travelTime
@@ -125,6 +138,15 @@ export default class App extends React.Component {
     this.setState({ postcode: input });
   };
 
+=======
+    ]} degrees and will later be around ${[allTemp[3]]} degrees.`;
+    weatherReport += `Today it will take you ${
+      this.state.travelTime
+    } minutes to get to work.`;
+    return weatherReport;
+  };
+
+>>>>>>> cf2440a... pass traveltime to parent app.js
   render() {
     let date = Date(Date.now().toString()).substring(0, 16);
     if (this.state.isLoading) {
@@ -156,6 +178,7 @@ export default class App extends React.Component {
               <Weather weatherData={this.state.dataSource} />
             </View>
             <View style={styles.dateContainer}>
+<<<<<<< HEAD
               <TravelTime
                 postcode={this.state.postcode}
                 storeTravelTime={this.storeTravelTime}
@@ -172,6 +195,10 @@ export default class App extends React.Component {
                 returnKeyType={"done"}
                 clearTextOnFocus={true}
               />
+=======
+              <Text>Today's commute: </Text>
+              <TravelTime storeTravelTime={this.storeTravelTime} />
+>>>>>>> cf2440a... pass traveltime to parent app.js
             </View>
           </View>
         </LinearGradient>

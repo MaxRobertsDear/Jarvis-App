@@ -52,6 +52,9 @@ export default class TravelTime extends Component {
       .then(response => response.json())
       .then(responseJson => {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> cf2440a... pass traveltime to parent app.js
         this.setState(
           {
             dataSource: responseJson.travel_time_minutes
@@ -60,11 +63,14 @@ export default class TravelTime extends Component {
             this.props.storeTravelTime(responseJson.travel_time_minutes);
           }
         );
+<<<<<<< HEAD
 =======
         this.setState({
           dataSource: responseJson.travel_time_minutes
         });
 >>>>>>> 102785f... commit 1
+=======
+>>>>>>> cf2440a... pass traveltime to parent app.js
       })
       .catch(error => {
         console.log(error);
