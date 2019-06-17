@@ -51,6 +51,7 @@ export default class TravelTime extends Component {
     )
       .then(response => response.json())
       .then(responseJson => {
+<<<<<<< HEAD
         this.setState(
           {
             dataSource: responseJson.travel_time_minutes
@@ -59,13 +60,23 @@ export default class TravelTime extends Component {
             this.props.storeTravelTime(responseJson.travel_time_minutes);
           }
         );
+=======
+        this.setState({
+          dataSource: responseJson.travel_time_minutes
+        });
+>>>>>>> 102785f... commit 1
       })
       .catch(error => {
         console.log(error);
       });
   }
 
+<<<<<<< HEAD
   updateDestination = () => {
+=======
+  componentDidMount() {
+    // NB below async = gamble! fix if possible.
+>>>>>>> 102785f... commit 1
     this.getDestinationAsync().then(() => {
       this.getLocationAsync().then(() => {
         this.getTravelTimeAsync(
@@ -78,6 +89,7 @@ export default class TravelTime extends Component {
     });
   };
 
+<<<<<<< HEAD
   componentDidUpdate(prevProps, prevState) {
     // only update chart if the data has changed
     if (prevProps.postcode !== this.props.postcode) {
@@ -96,5 +108,10 @@ export default class TravelTime extends Component {
     } else {
       return <Text>Please enter your postcode</Text>;
     }
+=======
+  render() {
+    var journeyTime = this.state.dataSource;
+    return <Text>{journeyTime}</Text>;
+>>>>>>> 102785f... commit 1
   }
 }
