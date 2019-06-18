@@ -13,15 +13,15 @@ export default class TravelTime extends Component {
       destination: null,
       errorMessage: null,
       dataSource: null,
-      postcode: '',
+      postcode: ""
     };
   }
 
   _getPostcode = async () => {
-    var postcode = await AsyncStorage.getItem('destination')
-    console.log(postcode)
-    this.setState({ postcode })
-  }
+    var postcode = await AsyncStorage.getItem("destination");
+    console.log(postcode);
+    this.setState({ postcode });
+  };
 
   getLocationAsync = async () => {
     let { status } = await Expo.Permissions.askAsync(Expo.Permissions.LOCATION);
@@ -79,9 +79,7 @@ export default class TravelTime extends Component {
 =======
 >>>>>>> cf2440a... pass traveltime to parent app.js
       })
-      .catch(error => {
-        console.log(error);
-      });
+      .catch(error => {});
   }
 
 <<<<<<< HEAD
@@ -106,7 +104,7 @@ export default class TravelTime extends Component {
 <<<<<<< HEAD
 =======
   componentDidMount() {
-    this._getPostcode()
+    this._getPostcode();
   }
 
 >>>>>>> a03f84c... Async storage saves destination, speechRate, and name
@@ -126,11 +124,11 @@ export default class TravelTime extends Component {
       );
     } else {
       return (
-      <Button
-        onPress={() => this.props.navigation.navigate('Settings')}
-        title="Update your Travel destination"
-      />
-    )
+        <Button
+          onPress={() => this.props.navigation.navigate("Settings")}
+          title="Update your Travel destination"
+        />
+      );
     }
 =======
   render() {
