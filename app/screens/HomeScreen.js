@@ -1,36 +1,24 @@
 import React from "react";
-<<<<<<< HEAD
 import {
   StyleSheet,
   Text,
   View,
   ActivityIndicator,
   Image,
-<<<<<<< HEAD
-  Button,
-<<<<<<< HEAD
-  TextInput
-=======
   Button
->>>>>>> cf2440a... pass traveltime to parent app.js
-=======
-  TextInput,
-  Picker
->>>>>>> 4208eea... Separated into Home and Settings Screens
 } from "react-native";
-import { createStackNavigator, createAppContainer } from "react-navigation";
 import * as Speech from "expo-speech";
 import * as Location from "expo-location";
 import * as Permissions from "expo-permissions";
 import { LinearGradient } from "expo";
-import { Weather } from "./app/components/Weather";
-import weatherScript from "./app/utils/WeatherScript";
+import { Weather } from "../components/Weather";
+import weatherScript from "../utils/WeatherScript";
+import TravelTime from "../components/TravelTime.js";
+import { journeyTime } from "../components/TravelTime.js";
+import {AsyncStorage} from 'react-native';
 import { APP_ID } from "react-native-dotenv";
-import { homeBackground } from "./app/utils/Colours";
-import TravelTime from "./app/components/TravelTime.js";
-import { journeyTime } from "./app/components/TravelTime.js";
 
-class HomeScreen extends React.Component {
+export default class HomeScreen extends React.Component {
   constructor(props) {
     super(props);
     this.storeTravelTime = this.storeTravelTime.bind(this);
@@ -39,22 +27,10 @@ class HomeScreen extends React.Component {
       dataSource: null,
       weatherReport: null,
       latitude: null,
-<<<<<<< HEAD
       longitude: null,
       text: "Enter Postcode",
-<<<<<<< HEAD
-      postcode: ""
-=======
-      longitude: null
->>>>>>> cf2440a... pass traveltime to parent app.js
-=======
       postcode: "",
-<<<<<<< HEAD
-      speechRate: 1,
->>>>>>> b2e83d3... Added picker to settings to choose speech rate
-=======
       speechRate: 1.0,
->>>>>>> 3682286... Basic styling for settings page
     };
   }
 
@@ -121,11 +97,7 @@ class HomeScreen extends React.Component {
         }.,`;
       } else {
         weatherReport += `It is ${weatherScript[allWeather[0]].current}, and ${
-<<<<<<< HEAD
           weatherScript[allWeather[1]].soon
-=======
-          allWeather[1].soon
->>>>>>> cf2440a... pass traveltime to parent app.js
         }.,`;
       }
       if (allWeather[3].includes(allWeather[2])) {
@@ -140,7 +112,6 @@ class HomeScreen extends React.Component {
     }
     weatherReport += `The temperature is currently ${[
       allTemp[0]
-<<<<<<< HEAD
     ]} degrees and will later be around ${[allTemp[3]]} degrees.,`;
     weatherReport += `Today it will take you ${
       this.state.travelTime
@@ -153,15 +124,28 @@ class HomeScreen extends React.Component {
     this.setState({ postcode: input });
   };
 
-=======
-    ]} degrees and will later be around ${[allTemp[3]]} degrees.`;
-    weatherReport += `Today it will take you ${
-      this.state.travelTime
-    } minutes to get to work.`;
-    return weatherReport;
-  };
+_savePostcode = async (postcode) => {
+  try {
+    await AsyncStorage.setItem('@destinationPostcode',  postcode);
+  } catch (error) {
+    console.log("Error while saving data")
+  }
+  console.log("saving postcode" + postcode)
+};
 
->>>>>>> cf2440a... pass traveltime to parent app.js
+_getSavedPostcode = async () => {
+  try {
+    const destinationPostcode = await AsyncStorage.getItem('@destinationPostcode');
+    if (postcode !== null) {
+      // We have data!!
+      console.log("retrieving postcode" + destinationPostcode);
+      this.setState({ postcode: destinationPostcode })
+    }
+  } catch (error) {
+    console.log('Error retrieving data')
+  }
+};
+
   render() {
     let date = Date(Date.now().toString()).substring(0, 16);
     if (this.state.isLoading) {
@@ -196,50 +180,103 @@ class HomeScreen extends React.Component {
               <Weather weatherData={this.state.dataSource} />
             </View>
             <View style={styles.dateContainer}>
-<<<<<<< HEAD
               <TravelTime
+                navigation={this.props.navigation}
                 postcode={this.state.postcode}
                 storeTravelTime={this.storeTravelTime}
               />
             </View>
-
-            <View>
-              <TextInput
-                style={{ height: 40, borderColor: "gray", borderWidth: 1 }}
-                onChangeText={text => this.setState({ text })}
-                value={this.state.text}
-                onSubmitEditing={this.onSubmitEdit}
-                autoCompleteType={"postal-code"}
-                returnKeyType={"done"}
-                clearTextOnFocus={true}
-              />
-=======
-              <Text>Today's commute: </Text>
-              <TravelTime storeTravelTime={this.storeTravelTime} />
->>>>>>> cf2440a... pass traveltime to parent app.js
-            </View>
           </View>
         </LinearGradient>
       );
-=======
-import { createStackNavigator, createAppContainer } from 'react-navigation';
-import HomeScreen from './app/screens/HomeScreen'
-import SettingsScreen from './app/screens/SettingsScreen'
-
-const AppNavigator = createStackNavigator({
-  Home: {
-    screen: HomeScreen,
-    navigationOptions: {
-      headerTitle: 'Jarvis'
->>>>>>> 44f3cb4... Separated home and settings screen and added destination form to settings page
-    }
-  },
-  Settings: {
-    screen: SettingsScreen,
-    navigationOptions: {
-      headerTitle: 'Settings'
     }
   }
-});
+}
 
-export default createAppContainer(AppNavigator);
+_speak = (props, rate) => {
+  Speech.speak(`Good morning, this is your daily report: ${props}.`, { rate: rate })
+};
+
+
+const styles = StyleSheet.create({
+  backgroundContainer: {
+    flex: 1,
+  },
+  container: {
+    flex: 1,
+    justifyContent: "flex-start"
+  },
+  dateText: {
+    fontSize: 18,
+    fontFamily: "Verdana",
+  },
+  dateContainer: {
+    marginTop: 30,
+    marginLeft: 20,
+  },
+  buttonContainer: {
+    marginTop: 50,
+    backgroundColor: "#ffffff",
+    marginLeft: 20,
+    marginRight: 20,
+    borderRadius: 4,
+  },
+  weatherContainer: {
+    marginTop: 20,
+    flexDirection: "row",
+    backgroundColor: "transparent",
+  },
+  formContainer: {
+    marginTop: 30,
+    marginLeft: 20,
+    marginRight: 20,
+    paddingTop: 10,
+    paddingBottom: 10,
+    opacity: 0.9,
+    backgroundColor: "#ffffff",
+    borderRadius: 4,
+  },
+  settingsText: {
+    fontSize: 18,
+    fontFamily: "Verdana",
+    marginTop: 10,
+    marginLeft: 20,
+  },
+  speedContainer: {
+    height: 250,
+    marginTop: 30,
+    marginLeft: 20,
+    marginRight: 20,
+    paddingTop: 10,
+    paddingBottom: 10,
+    opacity: 0.9,
+    backgroundColor: "#ffffff",
+    borderRadius: 4,
+  },
+  speedData: {
+    flexDirection: "row",
+  },
+  speedPicker: {
+    marginTop: -5,
+    marginLeft: 20,
+  },
+  speedSpeech: {
+    marginTop: 50,
+    marginLeft: 160,
+  },
+  volumeIcon: {
+    height: 25,
+    width: 25,
+    marginLeft: 75,
+  },
+  saveButton: {
+    marginTop: 200,
+    marginLeft: 20,
+    marginRight: 20,
+    paddingTop: 10,
+    paddingBottom: 10,
+    opacity: 0.9,
+    backgroundColor: "#ffffff",
+    borderRadius: 4,
+  }
+});
