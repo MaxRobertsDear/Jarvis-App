@@ -230,6 +230,9 @@ export default class HomeScreen extends React.Component {
                 storeTravelTime={this.storeTravelTime}
               />
             </View>
+            <View>
+              <CalendarPull storeEventDetails={this.storeEventDetails} />
+            </View>
           </View>
         </LinearGradient>
       );
