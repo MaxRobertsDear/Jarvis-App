@@ -237,17 +237,45 @@ const AppNavigator = createStackNavigator({
     screen: HomeScreen,
     navigationOptions: {
 <<<<<<< HEAD
+<<<<<<< HEAD
       headerTitle: 'Jarvis'
 >>>>>>> 44f3cb4... Separated home and settings screen and added destination form to settings page
 =======
       headerTitle: "Jarvis"
 >>>>>>> 2a9e15a... add calendar
+=======
+      headerTitle: "JARVIS",
+      headerStyle: {
+        marginTop: 15,
+        backgroundColor: "#2980B9",
+        borderBottomWidth: 0,
+        borderColor: "#2980B9",
+      },
+      headerTintColor: "#FFFFFF",
+      headerTitleStyle: {
+        fontWeight: 'bold',
+        fontSize: 28,
+        letterSpacing: 8,
+      },
+>>>>>>> 3b65d7c... Added styling to home and settings pages
     }
   },
   Settings: {
     screen: SettingsScreen,
     navigationOptions: {
-      headerTitle: "Settings"
+      headerTitle: "SETTINGS",
+      headerStyle: {
+        marginTop: 15,
+        backgroundColor: "#2980B9",
+        borderBottomWidth: 0,
+        borderColor: "#2980B9",
+      },
+      headerTintColor: "#FFFFFF",
+      headerTitleStyle: {
+        fontWeight: 'bold',
+        fontSize: 20,
+        letterSpacing: 4,
+      },
     }
   }
 });
